@@ -46,6 +46,34 @@ const publications = [
   },
 ];
 
+const ResearchSearch = () => {
+  useEffect(() => {
+    const id = "google-cse-script";
+    if (document.getElementById(id)) return;
+    const s = document.createElement("script");
+    s.id = id;
+    s.async = true;
+    s.src = "https://cse.google.com/cse.js?cx=86021a982e3a14848";
+    document.body.appendChild(s);
+  }, []);
+  return (
+    <div className="not-prose mb-10 rounded-lg border border-border bg-card/40 p-5">
+      <div className="text-[10px] tracking-[0.2em] uppercase text-accent mb-3">🔎 Search Research</div>
+      <div className="gcse-searchbox-only" />
+      <div className="mt-4 text-sm">
+        <a
+          href="https://et-pioneer.github.io/Electric-Technocracy-Pioneers-Community/search#gsc.tab=0"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-primary hover:underline"
+        >
+          🌐 Unified Search Engine →
+        </a>
+      </div>
+    </div>
+  );
+};
+
 const ResearchPage = () => (
   <StaticPage
     title="Research · Electric Technocracy & Juridical Singularity | Singularity University KdK Krzb."
@@ -54,6 +82,8 @@ const ResearchPage = () => (
     eyebrow="Research Center"
     heading="Research at Singularity University KdK Krzb."
   >
+    <ResearchSearch />
+
     <p>
       Singularity University KdK Krzb is one of the leading academic platforms for research into the
       future of governance, Artificial Superintelligence (ASI), post-scarcity economics, and the
