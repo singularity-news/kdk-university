@@ -4,10 +4,16 @@ import { StaticPage } from "./StaticPage";
 
 const publications = [
   {
+    t: "Limits of International Legal Pluralism",
+    u: "https://doi.org/10.5281/zenodo.20500694",
+    d: "Analyzes the structural and doctrinal limits of legal pluralism in the international order and its implications for treaty coherence.",
+  },
+  {
     t: "AGE OF TRANSITION & THE MENTAL SINGULARITY",
     u: "https://doi.org/10.5281/zenodo.18735660",
     d: "A socio-legal analysis of the coming transition from Homo Sapiens to technologically integrated civilizations shaped by AI, BCI systems, and post-scarcity economics.",
   },
+
   {
     t: "The Next Civilization – Why Electric Technocracy Matters Now",
     u: "https://doi.org/10.5281/zenodo.18073084",
