@@ -28,11 +28,7 @@ export const ShareButtons = ({ url, title }: Props) => {
       Icon: Facebook,
       href: `https://www.facebook.com/sharer/sharer.php?u=${enc(absUrl)}`,
     },
-    {
-      label: "Share on LinkedIn",
-      Icon: Linkedin,
-      href: `https://www.linkedin.com/sharing/share-offsite/?url=${enc(absUrl)}`,
-    },
+
   ];
 
   const copy = async () => {
