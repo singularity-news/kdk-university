@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Twitter, Facebook, Linkedin, Link2, Check } from "lucide-react";
+import { Twitter, Facebook, Link2, Check } from "lucide-react";
 
 interface Props {
   url: string;
