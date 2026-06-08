@@ -169,6 +169,24 @@ const Courses = () => {
 
       <section className="section-pad border-t border-border/60">
         <div className="container">
+          <SectionHeader
+            eyebrow="Threads · Social Wire"
+            title="Threads · Singularity University Free Courses"
+            description="Live posts from the Singularity University Free Courses Threads channel."
+          />
+          <EmbedFrame
+            src="https://widgets.sociablekit.com/threads-posts/iframe/25686181"
+            title="Threads · Singularity University Free Courses"
+            height={700}
+            mobileHeight={550}
+            maxWidth={560}
+          />
+        </div>
+      </section>
+
+      <section className="section-pad border-t border-border/60">
+
+        <div className="container">
           <SectionHeader eyebrow="Topics Covered" title="Six Pillars of Study" />
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {topics.map(({ i: Icon, t, d }) => (
