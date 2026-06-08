@@ -5,6 +5,8 @@ import { Footer } from "@/components/site/Footer";
 import { ShareButtons } from "@/components/site/ShareButtons";
 import { BackToTop } from "@/components/site/BackToTop";
 import { SectionHeader } from "@/components/site/SectionHeader";
+import { EmbedFrame } from "@/components/site/Embeds";
+
 
 const TITLE = "Free Singularity University Courses · International Law, Treaty Chains, AI Governance";
 const DESCRIPTION =
@@ -166,6 +168,24 @@ const Courses = () => {
       </section>
 
       <section className="section-pad border-t border-border/60">
+        <div className="container">
+          <SectionHeader
+            eyebrow="Threads · Social Wire"
+            title="Threads · Singularity University Free Courses"
+            description="Live posts from the Singularity University Free Courses Threads channel."
+          />
+          <EmbedFrame
+            src="https://widgets.sociablekit.com/threads-posts/iframe/25686181"
+            title="Threads · Singularity University Free Courses"
+            height={700}
+            mobileHeight={550}
+            maxWidth={560}
+          />
+        </div>
+      </section>
+
+      <section className="section-pad border-t border-border/60">
+
         <div className="container">
           <SectionHeader eyebrow="Topics Covered" title="Six Pillars of Study" />
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">

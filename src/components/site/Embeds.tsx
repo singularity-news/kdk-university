@@ -33,16 +33,20 @@ const iframeStyle = {
   colorScheme: "dark" as const,
 };
 
-const Frame = ({
+export const EmbedFrame = ({
   src,
   title,
   height = 1200,
+  mobileHeight,
   maxWidth,
   autoLoad = false,
 }: {
   src: string;
   title: string;
+  /** Desktop iframe height in px */
   height?: number;
+  /** Mobile iframe height in px (defaults to ~70% of desktop) */
+  mobileHeight?: number;
   maxWidth?: number;
   /** When false the iframe stays gated behind a "Load embed" button. */
   autoLoad?: boolean;
@@ -50,10 +54,8 @@ const Frame = ({
   const [state, setState] = useState<"idle" | "loading" | "ready" | "error">(
     autoLoad ? "loading" : "idle",
   );
-  // bumping this nonce forces the <iframe> to remount on retry
   const [nonce, setNonce] = useState(0);
 
-  // Auto-load if the user already opted in for this src on a previous visit.
   useEffect(() => {
     if (state === "idle" && wasLoaded(src)) setState("loading");
   }, [src, state]);
@@ -69,101 +71,113 @@ const Frame = ({
     setNonce((n) => n + 1);
   };
 
+  const mh = mobileHeight ?? Math.round(height * 0.75);
+
   return (
     <div
-      className="relative rounded-xl border border-border bg-background overflow-hidden text-foreground"
-      style={{ minHeight: Math.min(height, 320) }}
+      className="relative rounded-xl border border-border bg-background overflow-hidden text-foreground w-full"
+      style={{
+        // Responsive container height — driven by CSS vars so the iframe fills it
+        height: "var(--embed-h)",
+        ["--embed-h" as string]: `${mh}px`,
+      }}
     >
-      {/* Idle (opt-in) — keeps third-party widgets from blocking content */}
-      {state === "idle" && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-background text-foreground p-6 text-center">
-          <span className="text-[11px] tracking-[0.25em] uppercase text-accent">External embed</span>
-          <p className="text-sm text-muted-foreground max-w-sm">
-            {title} is hosted by a third party. Loading it on demand keeps this page fast.
-          </p>
-          <div className="flex flex-wrap items-center gap-3 justify-center">
-            <button
-              onClick={start}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-primary/60 bg-primary/10 text-foreground text-xs tracking-[0.2em] uppercase hover:bg-primary/20 transition-all"
-            >
-              <Play className="h-3.5 w-3.5" /> Load embed
-            </button>
-            <a
-              href={src}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-xs tracking-[0.2em] uppercase text-muted-foreground hover:text-foreground"
-            >
-              Open source <ExternalLink className="h-3.5 w-3.5" />
-            </a>
+      <style>{`
+        @media (min-width: 768px) {
+          [data-embed="${src}"] { --embed-h: ${height}px !important; }
+        }
+      `}</style>
+      <div data-embed={src} className="absolute inset-0" style={{ height: "100%" }}>
+        {state === "idle" && (
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-background text-foreground p-6 text-center">
+            <span className="text-[11px] tracking-[0.25em] uppercase text-accent">External embed</span>
+            <p className="text-sm text-muted-foreground max-w-sm">
+              {title} is hosted by a third party. Loading it on demand keeps this page fast.
+            </p>
+            <div className="flex flex-wrap items-center gap-3 justify-center">
+              <button
+                onClick={start}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-primary/60 bg-primary/10 text-foreground text-xs tracking-[0.2em] uppercase hover:bg-primary/20 transition-all"
+              >
+                <Play className="h-3.5 w-3.5" /> Load embed
+              </button>
+              <a
+                href={src}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-xs tracking-[0.2em] uppercase text-muted-foreground hover:text-foreground"
+              >
+                Open source <ExternalLink className="h-3.5 w-3.5" />
+              </a>
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {/* Loading skeleton — keeps wrapper dark-blue while iframe initialises */}
-      {state === "loading" && (
-        <div
-          className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-background text-foreground/70"
-          aria-hidden="true"
-        >
-          <div className="h-8 w-8 rounded-full border-2 border-primary/40 border-t-primary animate-spin" />
-          <span className="text-[11px] tracking-[0.25em] uppercase text-muted-foreground">
-            Loading {title}
-          </span>
-        </div>
-      )}
-
-      {/* Error fallback — same dark theme, white text, with retry */}
-      {state === "error" && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-background text-foreground p-6 text-center">
-          <span className="text-[11px] tracking-[0.25em] uppercase text-accent">Embed unavailable</span>
-          <p className="text-sm text-muted-foreground max-w-xs">
-            {title} could not be loaded. Try again or open the source directly.
-          </p>
-          <div className="flex flex-wrap items-center gap-3 justify-center">
-            <button
-              onClick={retry}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-primary/60 bg-primary/10 text-foreground text-xs tracking-[0.2em] uppercase hover:bg-primary/20 transition-all"
-            >
-              <RefreshCw className="h-3.5 w-3.5" /> Retry
-            </button>
-            <a
-              href={src}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-xs tracking-[0.2em] uppercase text-muted-foreground hover:text-foreground"
-            >
-              Open source <ExternalLink className="h-3.5 w-3.5" />
-            </a>
+        {state === "loading" && (
+          <div
+            className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-background text-foreground/70"
+            aria-hidden="true"
+          >
+            <div className="h-8 w-8 rounded-full border-2 border-primary/40 border-t-primary animate-spin" />
+            <span className="text-[11px] tracking-[0.25em] uppercase text-muted-foreground">
+              Loading {title}
+            </span>
           </div>
-        </div>
-      )}
+        )}
 
-      {state !== "idle" && (
-        <iframe
-          key={nonce}
-          src={src}
-          title={title}
-          height={height}
-          loading="lazy"
-          onLoad={() => {
-            rememberLoaded(src);
-            setState("ready");
-          }}
-          onError={() => setState("error")}
-          className="w-full block bg-background"
-          style={{
-            ...iframeStyle,
-            maxWidth: maxWidth ? `${maxWidth}px` : "100%",
-            margin: maxWidth ? "0 auto" : undefined,
-            opacity: state === "ready" ? 1 : 0,
-            transition: "opacity 250ms ease",
-          }}
-        />
-      )}
+        {state === "error" && (
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-background text-foreground p-6 text-center">
+            <span className="text-[11px] tracking-[0.25em] uppercase text-accent">Embed unavailable</span>
+            <p className="text-sm text-muted-foreground max-w-xs">
+              {title} could not be loaded. Try again or open the source directly.
+            </p>
+            <div className="flex flex-wrap items-center gap-3 justify-center">
+              <button
+                onClick={retry}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-primary/60 bg-primary/10 text-foreground text-xs tracking-[0.2em] uppercase hover:bg-primary/20 transition-all"
+              >
+                <RefreshCw className="h-3.5 w-3.5" /> Retry
+              </button>
+              <a
+                href={src}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-xs tracking-[0.2em] uppercase text-muted-foreground hover:text-foreground"
+              >
+                Open source <ExternalLink className="h-3.5 w-3.5" />
+              </a>
+            </div>
+          </div>
+        )}
+
+        {state !== "idle" && (
+          <iframe
+            key={nonce}
+            src={src}
+            title={title}
+            loading="lazy"
+            onLoad={() => {
+              rememberLoaded(src);
+              setState("ready");
+            }}
+            onError={() => setState("error")}
+            className="block bg-background w-full h-full"
+            style={{
+              ...iframeStyle,
+              maxWidth: maxWidth ? `${maxWidth}px` : "100%",
+              margin: maxWidth ? "0 auto" : undefined,
+              opacity: state === "ready" ? 1 : 0,
+              transition: "opacity 250ms ease",
+            }}
+          />
+        )}
+      </div>
     </div>
   );
 };
+
+const Frame = EmbedFrame;
+
 
 export const Embeds = () => (
   <section id="channels" className="section-pad border-t border-border/60 relative bg-background text-foreground">

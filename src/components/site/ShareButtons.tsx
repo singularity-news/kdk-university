@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Twitter, Facebook, Linkedin, Link2, Check } from "lucide-react";
+import { Twitter, Facebook, Link2, Check } from "lucide-react";
 
 interface Props {
   url: string;
@@ -28,11 +28,7 @@ export const ShareButtons = ({ url, title }: Props) => {
       Icon: Facebook,
       href: `https://www.facebook.com/sharer/sharer.php?u=${enc(absUrl)}`,
     },
-    {
-      label: "Share on LinkedIn",
-      Icon: Linkedin,
-      href: `https://www.linkedin.com/sharing/share-offsite/?url=${enc(absUrl)}`,
-    },
+
   ];
 
   const copy = async () => {
