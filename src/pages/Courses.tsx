@@ -116,45 +116,51 @@ const Courses = () => {
 
       <section className="section-pad border-t border-border/60">
         <div className="container">
-          <SectionHeader eyebrow="Available Courses" title="Start Learning" description="Two open courses are currently available — one hosted on this platform, one external." />
-          <div className="grid md:grid-cols-2 gap-6">
+          <SectionHeader
+            eyebrow="Available Courses"
+            title="Singularity University · Free Online Courses"
+            description="All courses are published openly at singularity41.wordpress.com — 100% free, no registration required."
+          />
+          <div className="mb-8">
             <a
-              href={`${import.meta.env.BASE_URL}courses/treaty_chain/index.html`}
+              href="https://singularity41.wordpress.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="card-hover group rounded-xl border border-border bg-card/50 backdrop-blur p-7 flex flex-col"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-md border border-primary/40 bg-primary/5 text-primary hover:bg-primary/10 transition-colors text-sm tracking-[0.15em] uppercase"
             >
-              <div className="text-[10px] tracking-[0.25em] uppercase text-accent mb-3">Course · Hosted</div>
-              <h3 className="text-xl font-semibold mb-3 group-hover:text-primary transition-colors leading-snug">
-                Treaty Chains, Supplementary Instruments, and the Transformability of International Law
-              </h3>
-              <p className="text-sm text-muted-foreground leading-relaxed flex-1">
-                Interactive lesson exploring how treaty chains, supplementary instruments and institutional
-                interoperability shape the transformability of modern international law.
-              </p>
-              <div className="mt-5 inline-flex items-center gap-1.5 text-xs tracking-[0.2em] uppercase text-primary">
-                Open course <ArrowRight className="h-3 w-3" />
-              </div>
+              🎓 Course Hub · singularity41.wordpress.com <ExternalLink className="h-3.5 w-3.5" />
             </a>
-
-            <a
-              href="https://honen.com/share/QTUobGRldMIJSzlqHnveZfTUv9TMoAhC"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="card-hover group rounded-xl border border-border bg-card/50 backdrop-blur p-7 flex flex-col"
-            >
-              <div className="text-[10px] tracking-[0.25em] uppercase text-accent mb-3">Course · External</div>
-              <h3 className="text-xl font-semibold mb-3 group-hover:text-primary transition-colors leading-snug">
-                Customary International Law, Sovereign Consent, and the Juridical Singularity
-              </h3>
-              <p className="text-sm text-muted-foreground leading-relaxed flex-1">
-                External free course examining the role of customary international law and sovereign consent in the
-                emergence of the Juridical Singularity.
-              </p>
-              <div className="mt-5 inline-flex items-center gap-1.5 text-xs tracking-[0.2em] uppercase text-primary">
-                Open course <ExternalLink className="h-3 w-3" />
-              </div>
-            </a>
+          </div>
+          <div className="grid md:grid-cols-2 gap-5">
+            {[
+              { icon: "✒️", title: "Customary International Law, Sovereign Consent, and the Juridical Singularity", url: "https://singularity41.wordpress.com/2026/05/20/customary-international-law/" },
+              { icon: "⛓️", title: "Treaty Chain", url: "https://singularity41.wordpress.com/2026/05/20/treaty-chains/" },
+              { icon: "🁢", title: "Dominoeffect — Territorial Expansion", url: "https://singularity41.wordpress.com/2026/05/23/course-territorial-expansion/" },
+              { icon: "🗄️", title: "Notary Custodianship — Lessons", url: "https://singularity41.wordpress.com/2026/05/22/third-party-custodianship/" },
+              { icon: "📚", title: "Notary Custodianship — Course", url: "https://singularity41.wordpress.com/2026/05/22/course-notary-custodianship/" },
+              { icon: "⚖️", title: "Freedom of Contract", url: "https://singularity41.wordpress.com/2026/05/23/freedom-of-contract/" },
+              { icon: "🌐", title: "International Law Treaty Systems", url: "https://singularity41.wordpress.com/2026/05/24/international-law-treaty-systems/" },
+              { icon: "📡", title: "Treaty Chains — Telecommunications, Governance, Juridical Singularity (Lesson)", url: "https://singularity41.wordpress.com/2026/05/23/international-law-treaty-chains-juridical-singularity/" },
+              { icon: "🔌", title: "UBI · Electric Technocracy — Course", url: "https://singularity41.wordpress.com/2026/05/25/ubi-electric-technocracy/" },
+            ].map((c) => (
+              <a
+                key={c.url}
+                href={c.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="card-hover group rounded-xl border border-border bg-card/50 backdrop-blur p-6 flex flex-col"
+              >
+                <div className="text-[10px] tracking-[0.25em] uppercase text-accent mb-3 flex items-center gap-2">
+                  <span className="text-base">{c.icon}</span> Free Course
+                </div>
+                <h3 className="text-lg font-semibold mb-3 group-hover:text-primary transition-colors leading-snug flex-1">
+                  {c.title}
+                </h3>
+                <div className="mt-3 inline-flex items-center gap-1.5 text-xs tracking-[0.2em] uppercase text-primary">
+                  Open course <ExternalLink className="h-3 w-3" />
+                </div>
+              </a>
+            ))}
           </div>
         </div>
       </section>
