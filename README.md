@@ -1,4 +1,4 @@
-# Singularity University — Description
+# Singularity University
 
 Singularity University is a global innovation and learning community focused on the impact of **exponential technologies** on society, governance, and long‑term human development. Founded in Silicon Valley, it brings together researchers, entrepreneurs, technologists, and policymakers to explore how rapid technological acceleration reshapes economic systems, legal structures, and global cooperation.
 
