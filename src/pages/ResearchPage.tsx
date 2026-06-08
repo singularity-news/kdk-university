@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import { StaticPage } from "./StaticPage";
+
 
 const publications = [
   {
