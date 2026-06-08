@@ -5,6 +5,8 @@ import { Footer } from "@/components/site/Footer";
 import { ShareButtons } from "@/components/site/ShareButtons";
 import { BackToTop } from "@/components/site/BackToTop";
 import { SectionHeader } from "@/components/site/SectionHeader";
+import { EmbedFrame } from "@/components/site/Embeds";
+
 
 const TITLE = "Free Singularity University Courses · International Law, Treaty Chains, AI Governance";
 const DESCRIPTION =
