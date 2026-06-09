@@ -7,6 +7,7 @@ import { SectionHeader } from "@/components/site/SectionHeader";
 import { Embeds } from "@/components/site/Embeds";
 import { ShareButtons } from "@/components/site/ShareButtons";
 import { BackToTop } from "@/components/site/BackToTop";
+import GlobalComixFeed from "@/components/site/GlobalComixFeed";
 import { TECH_NEWS, TECH_NEWS_GENERATED_AT } from "@/data/tech-news.generated";
 import articlesData from "@/data/articles.json";
 
