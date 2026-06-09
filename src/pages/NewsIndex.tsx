@@ -221,16 +221,7 @@ const NewsIndex = () => {
             title="Global Epic Fail — World Succession Deed"
             description="Syndicated chapters via GlobalComix RSS."
           />
-          <div className="rounded-xl border border-border bg-background overflow-hidden" style={{ width: "100%", maxWidth: "100%" }}>
-            <iframe
-              src="https://globalcomix.com/c/global-epic-fail-world-succession-deed/chapters/de/rss"
-              style={{ width: "100%", height: "550px", border: 0 }}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
-              title="GlobalComix · Global Epic Fail RSS"
-            />
-          </div>
+          <GlobalComixFeed />
         </div>
       </section>
 
