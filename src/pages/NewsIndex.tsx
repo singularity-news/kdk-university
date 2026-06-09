@@ -198,11 +198,10 @@ const NewsIndex = () => {
             title="Spotify · Singularity University"
             description="Listen to dispatches on international law, treaty systems, and the architecture of future civilization."
           />
-          <div className="rounded-xl border border-border bg-background overflow-hidden">
+          <div className="rounded-xl border border-border bg-background overflow-hidden w-full">
             <iframe
               data-testid="embed-iframe"
-              style={{ borderRadius: "12px" }}
-              src="https://open.spotify.com/embed/show/1oxMMUvvIAjtzM8WXOXN9d?utm_source=generator"
+              src="https://open.spotify.com/embed/show/1oxMMUvvIAjtzM8WXOXN9d?utm_source=generator?theme=0"
               width="100%"
               height="152"
               frameBorder="0"
@@ -210,6 +209,7 @@ const NewsIndex = () => {
               allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
               loading="lazy"
               title="Spotify Podcast · Singularity University"
+              style={{ border: 0, display: "block", width: "100%", maxHeight: "550px", colorScheme: "dark", background: "hsl(var(--background))" }}
             />
           </div>
         </div>
