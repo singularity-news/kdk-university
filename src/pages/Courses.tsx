@@ -263,9 +263,7 @@ const Courses = () => {
           <EmbedFrame
             src="https://widgets.sociablekit.com/threads-posts/iframe/25686181"
             title="Threads · Singularity University Free Courses"
-            height={700}
-            mobileHeight={550}
-            maxWidth={560}
+            height={550}
           />
         </div>
       </section>

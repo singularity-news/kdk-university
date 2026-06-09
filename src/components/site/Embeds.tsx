@@ -33,20 +33,24 @@ const iframeStyle = {
   colorScheme: "dark" as const,
 };
 
+const MAX_EMBED_H = 550;
+
 export const EmbedFrame = ({
   src,
   title,
-  height = 1200,
+  height = MAX_EMBED_H,
   mobileHeight,
-  maxWidth,
+  // Kept for backwards compatibility — embeds are now always full-width.
+  maxWidth: _maxWidth,
   autoLoad = false,
 }: {
   src: string;
   title: string;
-  /** Desktop iframe height in px */
+  /** Desktop iframe height in px (capped at 550) */
   height?: number;
-  /** Mobile iframe height in px (defaults to ~70% of desktop) */
+  /** Mobile iframe height in px (capped at 550) */
   mobileHeight?: number;
+  /** @deprecated embeds are always 100% width */
   maxWidth?: number;
   /** When false the iframe stays gated behind a "Load embed" button. */
   autoLoad?: boolean;
@@ -71,23 +75,24 @@ export const EmbedFrame = ({
     setNonce((n) => n + 1);
   };
 
-  const mh = mobileHeight ?? Math.round(height * 0.75);
+  const desktopH = Math.min(height, MAX_EMBED_H);
+  const mh = Math.min(mobileHeight ?? desktopH, MAX_EMBED_H);
 
   return (
     <div
       className="relative rounded-xl border border-border bg-background overflow-hidden text-foreground w-full"
       style={{
-        // Responsive container height — driven by CSS vars so the iframe fills it
         height: "var(--embed-h)",
         ["--embed-h" as string]: `${mh}px`,
       }}
     >
       <style>{`
         @media (min-width: 768px) {
-          [data-embed="${src}"] { --embed-h: ${height}px !important; }
+          [data-embed="${src}"] { --embed-h: ${desktopH}px !important; }
         }
       `}</style>
       <div data-embed={src} className="absolute inset-0" style={{ height: "100%" }}>
+
         {state === "idle" && (
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-background text-foreground p-6 text-center">
             <span className="text-[11px] tracking-[0.25em] uppercase text-accent">External embed</span>
@@ -164,13 +169,12 @@ export const EmbedFrame = ({
             className="block bg-background w-full h-full"
             style={{
               ...iframeStyle,
-              maxWidth: maxWidth ? `${maxWidth}px` : "100%",
-              margin: maxWidth ? "0 auto" : undefined,
               opacity: state === "ready" ? 1 : 0,
               transition: "opacity 250ms ease",
             }}
           />
         )}
+
       </div>
     </div>
   );
@@ -191,11 +195,11 @@ export const Embeds = () => (
         <Frame
           src="https://widgets.sociablekit.com/youtube-channel-videos/iframe/25680810"
           title="Singularity University · YouTube"
-          height={1000}
+          height={550}
         />
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-8">
+      <div className="grid gap-8 lg:grid-cols-2">
         <div>
           <SectionHeader
             eyebrow="RSS Wire I"
@@ -232,10 +236,10 @@ export const Embeds = () => (
         <Frame
           src="https://widgets.sociablekit.com/threads-posts/iframe/25681284"
           title="Threads · Singularity University"
-          height={1200}
-          maxWidth={520}
+          height={550}
         />
       </div>
+
     </div>
   </section>
 );
