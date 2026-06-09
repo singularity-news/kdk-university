@@ -167,22 +167,7 @@ const Courses = () => {
         </div>
       </section>
 
-      <section className="section-pad border-t border-border/60">
-        <div className="container">
-          <SectionHeader
-            eyebrow="Threads · Social Wire"
-            title="Threads · Singularity University Free Courses"
-            description="Live posts from the Singularity University Free Courses Threads channel."
-          />
-          <EmbedFrame
-            src="https://widgets.sociablekit.com/threads-posts/iframe/25686181"
-            title="Threads · Singularity University Free Courses"
-            height={700}
-            mobileHeight={550}
-            maxWidth={560}
-          />
-        </div>
-      </section>
+
 
       <section className="section-pad border-t border-border/60">
 
@@ -265,6 +250,23 @@ const Courses = () => {
           </div>
 
           <ShareButtons url={PATH} title={TITLE} />
+        </div>
+      </section>
+
+      <section className="section-pad border-t border-border/60">
+        <div className="container">
+          <SectionHeader
+            eyebrow="Threads · Social Wire"
+            title="Threads · Singularity University Free Courses"
+            description="Live posts from the Singularity University Free Courses Threads channel."
+          />
+          <EmbedFrame
+            src="https://widgets.sociablekit.com/threads-posts/iframe/25686181"
+            title="Threads · Singularity University Free Courses"
+            height={700}
+            mobileHeight={550}
+            maxWidth={560}
+          />
         </div>
       </section>
 
