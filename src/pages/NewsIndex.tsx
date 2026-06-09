@@ -190,6 +190,50 @@ const NewsIndex = () => {
 
       <Embeds />
 
+      <section className="section-pad border-t border-border/60">
+        <div className="container max-w-3xl">
+          <SectionHeader
+            eyebrow="Podcast"
+            title="Spotify · Singularity University"
+            description="Listen to dispatches on international law, treaty systems, and the architecture of future civilization."
+          />
+          <div className="rounded-xl border border-border bg-background overflow-hidden">
+            <iframe
+              data-testid="embed-iframe"
+              style={{ borderRadius: "12px" }}
+              src="https://open.spotify.com/embed/show/1oxMMUvvIAjtzM8WXOXN9d?utm_source=generator"
+              width="100%"
+              height="152"
+              frameBorder="0"
+              allowFullScreen
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"
+              title="Spotify Podcast · Singularity University"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section className="section-pad border-t border-border/60">
+        <div className="container">
+          <SectionHeader
+            eyebrow="Comics · RSS"
+            title="Global Epic Fail — World Succession Deed"
+            description="Syndicated chapters via GlobalComix RSS."
+          />
+          <div className="rounded-xl border border-border bg-background overflow-hidden" style={{ width: "100%", maxWidth: "100%" }}>
+            <iframe
+              src="https://globalcomix.com/c/global-epic-fail-world-succession-deed/chapters/de/rss"
+              style={{ width: "100%", height: "550px", border: 0 }}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+              title="GlobalComix · Global Epic Fail RSS"
+            />
+          </div>
+        </div>
+      </section>
+
       <Footer />
       <BackToTop />
     </main>
