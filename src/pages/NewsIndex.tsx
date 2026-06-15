@@ -65,11 +65,12 @@ const NewsIndex = () => {
   }, []);
 
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-dvh bg-background">
       <Nav />
 
       <section className="relative pt-32 pb-12 border-b border-border/60">
         <div className="container">
+          <h1 className="sr-only">Public News Portal · Singularity University</h1>
           <SectionHeader
             eyebrow="Public News Portal"
             title="Editorial · Research · Dispatches"
