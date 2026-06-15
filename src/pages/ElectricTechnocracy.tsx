@@ -2,8 +2,8 @@ import { StaticPage } from "./StaticPage";
 
 const ElectricTechnocracy = () => (
   <StaticPage
-    title="Electric Technocracy · The Future of Governance | Singularity University KdK Krzb."
-    description="Free online courses in Electric Technocracy, Juridical Singularity, ASI governance, Direct Digital Democracy and Universal Basic Income. Recognition of all existing law degrees worldwide."
+    title="Electric Technocracy · Singularity University"
+    description="Free courses on Electric Technocracy, Juridical Singularity, ASI governance, Direct Digital Democracy and Universal Basic Income."
     path="/electric-technocracy.html"
     eyebrow="Doctrine II · Academy"
     heading="Singularity University KdK Krzb — The Future of International Law and Electric Technocracy"

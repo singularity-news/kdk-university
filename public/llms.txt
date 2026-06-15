@@ -1,0 +1,18 @@
+# Singularity University · KdK Krzb.
+
+> An independent digital institution at the intersection of law, technology, infrastructure and intelligence — defining the academic frontier of Juridical Singularity and Electric Technocracy in the post-national era.
+
+Singularity University KdK Krzb. is a developing educational and research platform focused on Juridical Singularity, Electric Technocracy, the Age of Transition, treaty-chain governance, AI-era international law, Direct Digital Democracy and 100% free global education.
+
+## Pages
+
+- [Home](/): Institutional overview and doctrine summary.
+- [Juridical Singularity](/juridical-singularity.html): Doctrine on the unification of international legal systems through treaty chains and AI-era law.
+- [Electric Technocracy](/electric-technocracy.html): Governance framework based on automation, Direct Digital Democracy, UBI and ASI coordination.
+- [Research](/research.html): Key publications, papers and open research outputs.
+- [Courses](/courses.html): Free online courses on New International Law, Treaty Chains, AI Governance and digital sovereignty.
+- [News](/news.html): Editorial, research dispatches and syndicated technology wire.
+
+## Optional
+
+- [RSS Feed](/rss.xml): Full-text feed of the Public News Portal.
