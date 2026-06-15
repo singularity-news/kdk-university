@@ -7,14 +7,14 @@ export const Welcome = () => (
         <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
         Welcome
       </div>
-      <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.05] mb-6">
+      <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.05] mb-6">
         <span className="text-gradient">Singularity University</span>
         <br />
         <span className="text-gradient-accent">KdK Krzb.</span>
-      </h1>
-      <h2 className="text-xl md:text-3xl font-light text-foreground/90 mb-10 leading-snug">
-        Building the Intellectual Infrastructure for the Age of Transition
       </h2>
+      <p className="text-xl md:text-3xl font-light text-foreground/90 mb-10 leading-snug">
+        Building the Intellectual Infrastructure for the Age of Transition
+      </p>
 
       <div className="space-y-5 text-base md:text-lg text-muted-foreground leading-relaxed">
         <p>
