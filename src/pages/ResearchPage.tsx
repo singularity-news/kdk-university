@@ -76,8 +76,8 @@ const ResearchSearch = () => {
 
 const ResearchPage = () => (
   <StaticPage
-    title="Research · Electric Technocracy & Juridical Singularity | Singularity University KdK Krzb."
-    description="Open research on Artificial Superintelligence governance, post-scarcity economics, Direct Digital Democracy and the Juridical Singularity. Open access publications via Zenodo."
+    title="Research · Singularity University"
+    description="Open research on ASI governance, post-scarcity economics, Direct Digital Democracy and the Juridical Singularity. Open access via Zenodo."
     path="/research.html"
     eyebrow="Research Center"
     heading="Research at Singularity University KdK Krzb."

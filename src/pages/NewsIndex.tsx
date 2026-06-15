@@ -11,9 +11,9 @@ import GlobalComixFeed from "@/components/site/GlobalComixFeed";
 import { TECH_NEWS, TECH_NEWS_GENERATED_AT } from "@/data/tech-news.generated";
 import articlesData from "@/data/articles.json";
 
-const TITLE = "Public News Portal · Editorial · Research · Dispatches | Singularity University";
+const TITLE = "Public News Portal · Singularity University";
 const DESCRIPTION =
-  "Open access publications from the Singularity University editorial board, research desks and policy laboratory — covering Juridical Singularity, Electric Technocracy, AI Governance, infrastructure sovereignty and treaty systems.";
+  "Open access editorial, research and dispatches on Juridical Singularity, Electric Technocracy, AI governance and treaty systems.";
 
 const categories = [
   "All",

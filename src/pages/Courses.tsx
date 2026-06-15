@@ -8,9 +8,9 @@ import { SectionHeader } from "@/components/site/SectionHeader";
 import { EmbedFrame } from "@/components/site/Embeds";
 
 
-const TITLE = "Free Singularity University Courses · International Law, Treaty Chains, AI Governance";
+const TITLE = "Free Courses · Singularity University";
 const DESCRIPTION =
-  "Explore free Singularity University Courses on New International Law, Treaty Chains, Notary Custodian systems, Juridical Singularity, Electric Technocracy, AI governance, treaty interoperability, digital sovereignty, and global legal transformation in the Age of Transition.";
+  "Free courses on New International Law, Treaty Chains, AI Governance, Juridical Singularity and Electric Technocracy.";
 const KEYWORDS =
   "Singularity University Courses, New International Law, Treaty Chains, Juridical Singularity, Electric Technocracy, Notary Custodian, Treaty Interoperability, AI Governance, Digital Sovereignty, International Law, Customary International Law, NATO SOFA, UN Treaty Systems, Infrastructure Governance, Global Governance, Direct Digital Democracy, Treaty Succession, Telecommunications Law, Age of Transition, Legal Singularity";
 const PATH = "/courses.html";

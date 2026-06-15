@@ -18,11 +18,11 @@ export const Hero = () => {
             <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
             Online University · KdK Krzb.
           </div>
-          <div className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] mb-6">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] mb-6">
             <span className="text-gradient">SINGULARITY</span>
             <br />
             <span className="text-gradient-accent">UNIVERSITY</span>
-          </div>
+          </h1>
           <p className="text-lg md:text-2xl text-foreground/80 max-w-2xl mb-4 font-light">
             The Architecture of Future Civilization
           </p>

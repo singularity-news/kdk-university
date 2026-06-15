@@ -2,8 +2,8 @@ import { StaticPage } from "./StaticPage";
 
 const JuridicalSingularity = () => (
   <StaticPage
-    title="Juridical Singularity · The Global Academy for New International Law | Singularity University KdK Krzb."
-    description="Singularity University KdK Krzb is the world's first university dedicated to Juridical Singularity, Electric Technocracy, treaty-chain governance, AI-era law and Direct Digital Democracy. Free global online education."
+    title="Juridical Singularity · Singularity University"
+    description="Doctrine of Juridical Singularity: treaty-chain governance, AI-era international law and Direct Digital Democracy. Free global online education."
     path="/juridical-singularity.html"
     eyebrow="Doctrine I · Academy"
     heading="Singularity University KdK Krzb — The Global Academy for Juridical Singularity and New International Law"
