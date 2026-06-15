@@ -54,7 +54,7 @@ export const StaticPage = ({ title, description, path, eyebrow, heading, childre
   }, [title, description, path]);
 
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-dvh bg-background">
       <Nav />
       <article className="relative pt-32 pb-24">
         <div className="container max-w-3xl">

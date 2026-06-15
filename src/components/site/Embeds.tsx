@@ -121,9 +121,10 @@ export const EmbedFrame = ({
         {state === "loading" && (
           <div
             className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-background text-foreground/70"
-            aria-hidden="true"
+            role="status"
+            aria-live="polite"
           >
-            <div className="h-8 w-8 rounded-full border-2 border-primary/40 border-t-primary animate-spin" />
+            <div className="h-8 w-8 rounded-full border-2 border-primary/40 border-t-primary animate-spin" aria-hidden="true" />
             <span className="text-[11px] tracking-[0.25em] uppercase text-muted-foreground">
               Loading {title}
             </span>

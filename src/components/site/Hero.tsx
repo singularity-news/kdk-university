@@ -1,6 +1,6 @@
 export const Hero = () => {
   return (
-    <section id="top" className="relative min-h-screen flex items-center overflow-hidden">
+    <section id="top" className="relative min-h-dvh flex items-center overflow-hidden">
       {/* Brand hero logo background */}
       <img
         src={`${import.meta.env.BASE_URL}hero-logo.png`}
@@ -23,7 +23,7 @@ export const Hero = () => {
             <br />
             <span className="text-gradient-accent">UNIVERSITY</span>
           </div>
-          <p className="text-lg md:text-2xl text-silver/90 max-w-2xl mb-4 font-light" style={{ color: 'hsl(var(--silver))' }}>
+          <p className="text-lg md:text-2xl text-foreground/80 max-w-2xl mb-4 font-light">
             The Architecture of Future Civilization
           </p>
           <p className="text-base md:text-lg text-muted-foreground max-w-2xl mb-10">

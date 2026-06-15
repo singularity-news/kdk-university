@@ -93,7 +93,7 @@ const NewsArticle = () => {
 
   if (!article) {
     return (
-      <main className="min-h-screen bg-background">
+      <main className="min-h-dvh bg-background">
         <Nav />
         <section className="container max-w-2xl pt-40 pb-32 text-center">
           <h1 className="text-3xl font-semibold mb-4">Article not found</h1>
@@ -110,7 +110,7 @@ const NewsArticle = () => {
   const body = article.body || [article.excerpt];
 
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-dvh bg-background">
       <Nav />
 
       <article className="relative pt-32 pb-24">
