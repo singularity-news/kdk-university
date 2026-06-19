@@ -1,161 +1,392 @@
-import { StaticPage } from "./StaticPage";
+import { useEffect } from "react";
+import { Nav } from "@/components/site/Nav";
+import { Footer } from "@/components/site/Footer";
+import { ShareButtons } from "@/components/site/ShareButtons";
+import { BackToTop } from "@/components/site/BackToTop";
+import {
+  Scale,
+  Network,
+  Globe2,
+  Cpu,
+  Zap,
+  ShieldCheck,
+  Infinity as InfinityIcon,
+  Sparkles,
+  GitBranch,
+  Landmark,
+  Radio,
+  Database,
+} from "lucide-react";
 
-const JuridicalSingularity = () => (
-  <StaticPage
-    title="Juridical Singularity · Singularity University"
-    description="Doctrine of Juridical Singularity: treaty-chain governance, AI-era international law and Direct Digital Democracy. Free global online education."
-    path="/juridical-singularity.html"
-    eyebrow="Doctrine I · Academy"
-    heading="Singularity University KdK Krzb — The Global Academy for Juridical Singularity and New International Law"
-  >
-    <p>
-      Singularity University KdK Krzb is the world's first and only recognized university dedicated to
-      <strong> Juridical Singularity</strong>, <strong>Electric Technocracy</strong>, treaty-chain
-      governance, AI-era law, Direct Digital Democracy, and the future of international legal systems.
-      Free online courses, global degree recognition, and legal transformation for the post-national era.
-    </p>
+const SITE_URL =
+  (import.meta.env.VITE_SITE_URL as string | undefined)?.replace(/\/$/, "") ||
+  (typeof window !== "undefined" ? window.location.origin : "");
 
-    <h2>Welcome to the Future of Law</h2>
-    <p>
-      Singularity University KdK Krzb is the first global online university dedicated exclusively to the
-      study of Juridical Singularity, New International Law, Electric Technocracy, and the transformation
-      of legal systems in the age of Artificial Superintelligence (ASI).
-    </p>
-    <p>
-      The university emerged from the legal and philosophical framework surrounding the
-      <strong> World Succession Deed 1400/98</strong>, the international legal event that initiated the
-      transition from fragmented state sovereignty toward a unified global legal architecture.
-    </p>
-    <p>
-      KdK Krzb is recognized as the only academic institution specialized entirely in the legal
-      singularity doctrine, treaty-chain systems, infrastructure sovereignty, AI governance, and
-      post-national constitutional structures.
-    </p>
-    <p>
-      Our mission is to educate a new generation of legal thinkers, digital governance architects, AI-era
-      diplomats, and international systems engineers prepared for the irreversible transformation of
-      global law.
-    </p>
+const PATH = "/juridical-singularity.html";
+const TITLE = "Juridical Singularity · Singularity University";
+const DESCRIPTION =
+  "The Juridical Singularity: the irreversible legal event consolidating international treaty relationships into a unified post-national legal order.";
 
-    <h2>100% Free Global Education</h2>
-    <p>
-      All courses, seminars, certifications, and research materials at Singularity University KdK Krzb
-      are completely free of charge. Education must become universally accessible in the transition from
-      scarcity-based systems to abundance-based civilization. Knowledge is no longer a privilege; it is
-      infrastructure.
-    </p>
-    <p>
-      Students worldwide may enroll online without tuition fees, regardless of nationality, religion,
-      political affiliation, or economic status.
-    </p>
+const setMeta = (selector: string, attr: string, value: string) => {
+  let el = document.head.querySelector<HTMLMetaElement>(selector);
+  if (!el) {
+    el = document.createElement("meta");
+    const [, key, val] = selector.match(/\[(.+?)="(.+?)"\]/) || [];
+    if (key && val) el.setAttribute(key, val);
+    document.head.appendChild(el);
+  }
+  el.setAttribute(attr, value);
+};
 
-    <h2>Recognition of Existing Legal Degrees</h2>
-    <p>
-      All previous legal qualifications, law degrees, judicial certificates, and academic titles obtained
-      anywhere in the world remain recognized within the KdK Krzb framework. Graduates of classical legal
-      systems may request a free recognition and integration procedure into the new Juridical Singularity
-      educational structure. This includes:
-    </p>
-    <ul>
-      <li>Law degrees (LL.B., LL.M., JD, PhD)</li>
-      <li>Judicial qualifications</li>
-      <li>International law certifications</li>
-      <li>Diplomatic legal education</li>
-      <li>State legal examinations</li>
-      <li>Academic research credentials</li>
-      <li>Constitutional and administrative law studies</li>
-    </ul>
-    <p>
-      The transition into the new legal framework is designed as a continuity process rather than a
-      rupture. Existing expertise becomes part of the emerging universal legal architecture.
-    </p>
+const categories = [
+  {
+    icon: Landmark,
+    title: "State Succession",
+    body: "The deed creates a new subject of international law through state succession by new foundation — not a continuation of an existing state's identity.",
+  },
+  {
+    icon: GitBranch,
+    title: "Treaty Chain Integration",
+    body: "A supplementary instrument attached to NATO, SOFA, the UN Charter and ITU agreements. Effects propagate automatically through ratified treaty networks.",
+  },
+  {
+    icon: Network,
+    title: "Infrastructure Sovereignty",
+    body: "Network infrastructure defines jurisdiction. Telecom, energy, logistics and digital systems form interconnected legal territory — a domino effect across every connected network.",
+  },
+  {
+    icon: Scale,
+    title: "Jurisdiction",
+    body: "Jurisdiction follows sovereignty. Kompetenz-Kompetenz: the buyer holds authority to determine the interpretation and legal validity of the succession deed itself.",
+  },
+  {
+    icon: Sparkles,
+    title: "Functional Clean Slate",
+    body: "Sovereign rights transfer; political obligations and historical debts do not inherit. A completely new international legal subject emerges.",
+  },
+  {
+    icon: Cpu,
+    title: "AI-Era Foundation",
+    body: "Unified jurisdiction enables global digital identity, uniform standards, AI-assisted governance, cross-border coordination and automated compliance.",
+  },
+];
 
-    <h2>What Is Juridical Singularity?</h2>
-    <p>
-      Juridical Singularity is the systemic transformation of international law into a unified global
-      legal infrastructure. It represents the moment at which classical international law, based on
-      competing sovereign states, collapses into a single interoperable legal system connected through
-      treaty chains, infrastructure networks, digital governance, and AI-supported administration.
-    </p>
+const stages = [
+  "Transfer of property with all rights and obligations.",
+  "Transfer of infrastructure as a unified legal object.",
+  "Transfer of sovereign legal relationships.",
+  "Integration into NATO treaty structures.",
+  "Expansion into United Nations treaty chains.",
+  "Formation of a unified international legal framework.",
+];
 
-    <h3>Treaty Chain Integration</h3>
-    <p>
-      Existing NATO, UN, ITU, SOFA, telecommunications, and infrastructure treaties form interconnected
-      legal chains. Supplementary instruments can consolidate these frameworks into one operational legal
-      system without requiring complete re-ratification.
-    </p>
+const characteristics = [
+  { t: "Unique", d: "A one-time legal event." },
+  { t: "Irreversible", d: "The previous legal order cannot be restored." },
+  { t: "Global", d: "Effects extend through interconnected treaty systems." },
+  { t: "Infrastructure-Based", d: "Sovereignty follows physical and digital networks." },
+  { t: "Treaty-Driven", d: "Existing agreements remain in force, integrated into one framework." },
+  { t: "Future-Oriented", d: "Designed for a post-national, AI-supported civilization." },
+];
 
-    <h3>Infrastructure Sovereignty</h3>
-    <p>In the modern world, sovereignty is no longer defined primarily by borders but by control of infrastructure networks:</p>
-    <ul>
-      <li>Telecommunications</li>
-      <li>Energy grids</li>
-      <li>Broadband systems</li>
-      <li>Data infrastructure</li>
-      <li>Digital identity systems</li>
-      <li>AI governance layers</li>
-      <li>Global logistics networks</li>
-    </ul>
-    <p>Network connectivity becomes territorial connectivity.</p>
+const keyConcepts = [
+  "World Succession Deed 1400/98",
+  "State Succession by New Foundation",
+  "Treaty Chain",
+  "Supplementary Treaty Instrument",
+  "Infrastructure Sovereignty",
+  "Global Jurisdiction",
+  "Functional Clean Slate",
+  "Kompetenz-Kompetenz",
+  "Electric Technocracy",
+  "Direct Digital Democracy (DDD)",
+  "Artificial Superintelligence (ASI)",
+  "Legal Reset",
+];
 
-    <h3>Direct Digital Democracy</h3>
-    <p>
-      Representative democracy evolves into real-time digital participation systems supported by
-      transparent technological verification. Citizens participate continuously in governance through
-      secure digital protocols rather than delegating power every few years to political elites.
-    </p>
+const technocracyPoints = [
+  { i: Globe2, t: "Digital democracy" },
+  { i: Network, t: "Network-based administration" },
+  { i: Cpu, t: "AI-assisted decision support" },
+  { i: Zap, t: "Real-time resource management" },
+  { i: Radio, t: "Global legal interoperability" },
+  { i: Database, t: "Unified digital identity" },
+];
 
-    <h3>AI-Augmented Governance</h3>
-    <p>
-      Artificial Superintelligence changes the speed and complexity of civilization beyond the capacity
-      of traditional legislation. Law evolves from reactive bureaucracy into proactive compliance
-      architecture embedded directly into systems, protocols, and infrastructure.
-    </p>
+const JuridicalSingularity = () => {
+  useEffect(() => {
+    const absoluteUrl = `${SITE_URL}${PATH}`;
+    const ogImage = `${SITE_URL}/og-pic.png`;
+    document.title = TITLE;
+    setMeta('meta[name="description"]', "content", DESCRIPTION);
+    setMeta('meta[property="og:title"]', "content", TITLE);
+    setMeta('meta[property="og:description"]', "content", DESCRIPTION);
+    setMeta('meta[property="og:type"]', "content", "article");
+    setMeta('meta[property="og:url"]', "content", absoluteUrl);
+    setMeta('meta[property="og:image"]', "content", ogImage);
+    setMeta('meta[name="twitter:card"]', "content", "summary_large_image");
+    setMeta('meta[name="twitter:title"]', "content", TITLE);
+    setMeta('meta[name="twitter:description"]', "content", DESCRIPTION);
+    setMeta('meta[name="twitter:image"]', "content", ogImage);
 
-    <h3>From Scarcity to Abundance</h3>
-    <p>
-      Classical law developed to regulate scarcity, ownership conflicts, and territorial competition.
-      Post-scarcity technological civilization requires a completely different legal model focused on
-      coordination, optimization, and universal access.
-    </p>
+    let canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement("link");
+      canonical.rel = "canonical";
+      document.head.appendChild(canonical);
+    }
+    canonical.href = absoluteUrl;
+  }, []);
 
-    <h2>Areas of Study</h2>
-    <ul>
-      <li>Juridical Singularity Theory</li>
-      <li>International Treaty Law</li>
-      <li>NATO-SOFA Structures</li>
-      <li>UN Institutional Frameworks</li>
-      <li>Telecommunications Law</li>
-      <li>Infrastructure Sovereignty</li>
-      <li>AI Governance</li>
-      <li>Electric Technocracy</li>
-      <li>Direct Digital Democracy</li>
-      <li>Digital Constitutional Systems</li>
-      <li>Network Jurisdiction</li>
-      <li>Global Administrative Systems</li>
-      <li>Post-National Governance</li>
-      <li>Legal Philosophy of ASI</li>
-      <li>International State Succession</li>
-      <li>Algorithmic Governance Systems</li>
-    </ul>
+  return (
+    <main className="min-h-dvh bg-background">
+      <Nav />
 
-    <h2>Research and Academic Mission</h2>
-    <p>
-      The university functions as both an educational institution and a global research center for the
-      emerging legal reality of the technological singularity era. Research focuses on global legal
-      interoperability, AI-compatible governance, treaty-chain analysis, digital citizenship, network
-      jurisdiction, universal legal identity systems, infrastructure-based sovereignty, ethical ASI
-      governance and automated compliance systems.
-    </p>
+      {/* HERO */}
+      <header className="relative overflow-hidden border-b border-border/60 pt-32 pb-20 md:pt-40 md:pb-28">
+        <div className="absolute inset-0 grid-bg opacity-25" aria-hidden="true" />
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: "var(--gradient-hero)" }}
+          aria-hidden="true"
+        />
+        <div className="container relative max-w-5xl">
+          <div className="flex items-center gap-3 text-[10px] tracking-[0.3em] uppercase text-accent mb-6">
+            <span className="h-px w-10 bg-accent/60" />
+            Doctrine I · Academy
+          </div>
+          <h1 className="text-5xl md:text-7xl font-bold leading-[1.02] mb-8 text-gradient">
+            Juridical Singularity
+          </h1>
+          <p className="text-lg md:text-2xl text-foreground/80 leading-relaxed max-w-3xl">
+            The moment at which the existing international legal order reaches an{" "}
+            <span className="text-foreground font-medium">irreversible transformation</span> — a
+            systemic legal reset consolidating all treaty relationships into a single framework
+            through the World Succession Deed 1400/98.
+          </p>
 
-    <h2>The Beginning of a New Legal Civilization</h2>
-    <p>
-      Singularity University KdK Krzb does not merely teach law. It studies the transition from the old
-      legal world into the next stage of civilization. The age of isolated nation-state legal systems is
-      ending. A globally interconnected civilization requires globally interoperable law. The Juridical
-      Singularity marks the zero point of this transformation.
-    </p>
-  </StaticPage>
-);
+          <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
+            {[
+              { k: "1400/98", v: "Succession Deed" },
+              { k: "1", v: "Unified Framework" },
+              { k: "∞", v: "Treaty Chains" },
+              { k: "0", v: "Reversal Path" },
+            ].map((s) => (
+              <div
+                key={s.v}
+                className="glow-border rounded-lg border border-border bg-card/40 backdrop-blur p-4"
+              >
+                <div className="text-2xl md:text-3xl font-bold text-gradient-accent">{s.k}</div>
+                <div className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground mt-2">
+                  {s.v}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </header>
+
+      {/* DEFINITION & CORE PRINCIPLE */}
+      <section className="section-pad relative">
+        <div className="container max-w-5xl grid md:grid-cols-2 gap-10">
+          <article className="relative rounded-xl border border-border bg-card/60 backdrop-blur p-8 card-hover">
+            <Scale className="h-6 w-6 text-primary mb-4" />
+            <h2 className="text-2xl md:text-3xl font-semibold mb-4">Definition</h2>
+            <p className="text-foreground/80 leading-relaxed">
+              The unique legal event that transforms the traditional multi-state international
+              system into a unified legal order. The legal equivalent of a technological
+              singularity, where exponential legal integration replaces fragmented sovereignty.
+            </p>
+          </article>
+
+          <article className="relative rounded-xl border border-border bg-card/60 backdrop-blur p-8 card-hover">
+            <InfinityIcon className="h-6 w-6 text-accent mb-4" />
+            <h2 className="text-2xl md:text-3xl font-semibold mb-4">Core Principle</h2>
+            <p className="text-foreground/80 leading-relaxed">
+              The World Succession Deed 1400/98 is a{" "}
+              <span className="text-foreground font-medium">state succession instrument</span> — not
+              merely a property transaction. Because the property was transferred with all rights,
+              obligations and components as one integrated unit, the transfer extends beyond
+              physical ownership into international legal relationships.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      {/* MAIN CATEGORIES */}
+      <section className="section-pad border-t border-border/60 relative">
+        <div className="absolute inset-0 grid-bg opacity-10" aria-hidden="true" />
+        <div className="container relative max-w-6xl">
+          <div className="max-w-2xl mb-14">
+            <div className="text-[10px] tracking-[0.3em] uppercase text-primary mb-3">
+              Five Pillars
+            </div>
+            <h2 className="text-3xl md:text-5xl font-bold mb-4 text-gradient">Main Categories</h2>
+            <p className="text-muted-foreground leading-relaxed">
+              The doctrinal architecture through which a single succession instrument cascades into
+              a unified global legal order.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {categories.map(({ icon: Icon, title, body }, i) => (
+              <article
+                key={title}
+                className="group card-hover relative rounded-xl border border-border bg-card/60 backdrop-blur p-6"
+              >
+                <div className="flex items-center justify-between mb-5">
+                  <div className="h-10 w-10 rounded-md border border-primary/30 bg-primary/10 grid place-items-center group-hover:bg-accent/10 group-hover:border-accent/40 transition-colors">
+                    <Icon className="h-5 w-5 text-primary group-hover:text-accent transition-colors" />
+                  </div>
+                  <span className="text-[10px] tracking-[0.25em] uppercase text-muted-foreground">
+                    0{i + 1}
+                  </span>
+                </div>
+                <h3 className="text-lg font-semibold mb-2">{title}</h3>
+                <p className="text-sm text-foreground/75 leading-relaxed">{body}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* LEGAL MECHANISM — STAGES */}
+      <section className="section-pad border-t border-border/60">
+        <div className="container max-w-4xl">
+          <div className="max-w-2xl mb-14">
+            <div className="text-[10px] tracking-[0.3em] uppercase text-accent mb-3">
+              Sequential Stages
+            </div>
+            <h2 className="text-3xl md:text-5xl font-bold mb-4 text-gradient">Legal Mechanism</h2>
+            <p className="text-muted-foreground leading-relaxed">
+              The doctrine identifies a chained progression: each stage activates the next, with no
+              re-ratification required.
+            </p>
+          </div>
+
+          <ol className="relative border-l border-border/80 ml-3 space-y-8">
+            {stages.map((s, i) => (
+              <li key={i} className="pl-8 relative">
+                <span className="absolute -left-[13px] top-0 h-6 w-6 rounded-full border border-primary/60 bg-background grid place-items-center text-[11px] font-semibold text-primary">
+                  {i + 1}
+                </span>
+                <div className="text-base md:text-lg text-foreground/90 leading-relaxed">{s}</div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* AI + ELECTRIC TECHNOCRACY */}
+      <section className="section-pad border-t border-border/60 relative">
+        <div className="container max-w-6xl grid lg:grid-cols-2 gap-10">
+          <article className="rounded-xl border border-border bg-card/60 backdrop-blur p-8 md:p-10 card-hover">
+            <Cpu className="h-7 w-7 text-primary mb-5" />
+            <h2 className="text-2xl md:text-3xl font-semibold mb-4">Relationship to AI</h2>
+            <p className="text-foreground/80 leading-relaxed mb-5">
+              The Juridical Singularity is presented as the legal foundation required for the age of{" "}
+              <span className="text-foreground font-medium">Artificial Superintelligence (ASI)</span>.
+              Traditional legal systems are too fragmented to regulate global AI infrastructures.
+            </p>
+            <ul className="space-y-2 text-sm text-foreground/80">
+              {[
+                "Global digital identity",
+                "Uniform legal standards",
+                "AI-assisted governance",
+                "Cross-border resource coordination",
+                "Automated legal compliance",
+              ].map((x) => (
+                <li key={x} className="flex items-start gap-3">
+                  <ShieldCheck className="h-4 w-4 text-accent mt-0.5 shrink-0" />
+                  <span>{x}</span>
+                </li>
+              ))}
+            </ul>
+          </article>
+
+          <article className="rounded-xl border border-border bg-card/60 backdrop-blur p-8 md:p-10 card-hover">
+            <Zap className="h-7 w-7 text-accent mb-5" />
+            <h2 className="text-2xl md:text-3xl font-semibold mb-4">Electric Technocracy</h2>
+            <p className="text-foreground/80 leading-relaxed mb-5">
+              The legal foundation for a governance model in which political administration evolves
+              into digitally coordinated infrastructure. Instead of competing national
+              jurisdictions, governance centers on:
+            </p>
+            <div className="grid grid-cols-2 gap-3">
+              {technocracyPoints.map(({ i: Icon, t }) => (
+                <div
+                  key={t}
+                  className="flex items-center gap-3 rounded-md border border-border/70 bg-background/40 p-3"
+                >
+                  <Icon className="h-4 w-4 text-primary shrink-0" />
+                  <span className="text-xs md:text-sm text-foreground/85">{t}</span>
+                </div>
+              ))}
+            </div>
+          </article>
+        </div>
+      </section>
+
+      {/* CHARACTERISTICS */}
+      <section className="section-pad border-t border-border/60">
+        <div className="container max-w-6xl">
+          <div className="max-w-2xl mb-14">
+            <div className="text-[10px] tracking-[0.3em] uppercase text-primary mb-3">
+              Properties
+            </div>
+            <h2 className="text-3xl md:text-5xl font-bold mb-4 text-gradient">
+              Important Characteristics
+            </h2>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {characteristics.map((c) => (
+              <div
+                key={c.t}
+                className="rounded-lg border border-border bg-card/60 backdrop-blur p-5 card-hover"
+              >
+                <div className="text-xs tracking-[0.2em] uppercase text-accent mb-2">{c.t}</div>
+                <div className="text-sm text-foreground/80 leading-relaxed">{c.d}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* KEY CONCEPTS */}
+      <section className="section-pad border-t border-border/60 relative">
+        <div className="absolute inset-0 grid-bg opacity-10" aria-hidden="true" />
+        <div className="container relative max-w-5xl">
+          <div className="max-w-2xl mb-10">
+            <div className="text-[10px] tracking-[0.3em] uppercase text-accent mb-3">Lexicon</div>
+            <h2 className="text-3xl md:text-5xl font-bold mb-4 text-gradient">Key Concepts</h2>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            {keyConcepts.map((k) => (
+              <span
+                key={k}
+                className="rounded-full border border-border bg-card/60 backdrop-blur px-4 py-2 text-xs md:text-sm text-foreground/85 hover:border-primary/50 hover:text-foreground transition-colors"
+              >
+                {k}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SHARE */}
+      <section className="pb-24">
+        <div className="container max-w-3xl">
+          <ShareButtons url={PATH} title={TITLE} />
+          <div className="mt-8 pt-8 border-t border-border/60 text-xs tracking-[0.2em] uppercase text-muted-foreground">
+            Singularity University · KdK Krzb. · Editorial Board
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+      <BackToTop />
+    </main>
+  );
+};
 
 export default JuridicalSingularity;
