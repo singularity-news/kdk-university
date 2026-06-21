@@ -135,9 +135,40 @@ const toc = [
   { id: "science", label: "Science & Governance" },
   { id: "ethics", label: "Ethics" },
   { id: "vision", label: "Vision" },
+  { id: "faq", label: "FAQ" },
+];
+
+const faqs: { q: string; a: string }[] = [
+  {
+    q: "What is Electric Technocracy?",
+    a: "Electric Technocracy is a governance model in which Artificial Superintelligence (ASI), robotics and automation handle most economic production and public administration, while citizens make political decisions directly via Direct Digital Democracy.",
+  },
+  {
+    q: "How does Direct Digital Democracy (DDD) work?",
+    a: "Proposals are submitted publicly, discussed, analyzed by AI for impact, and then decided through digital voting using a secure digital identity. Approved decisions are implemented through automated systems.",
+  },
+  {
+    q: "Is ASI in charge of political decisions?",
+    a: "No. ASI serves as the analytical core and prepares evidence-based options. The final decisions always remain with citizens through democratic voting.",
+  },
+  {
+    q: "How is Universal Basic Income (UBI) financed?",
+    a: "UBI is funded through taxation of machine productivity — robots, AI systems, autonomous factories and machine-generated output — rather than taxes on human labor.",
+  },
+  {
+    q: "What is the relationship between Electric Technocracy and the Juridical Singularity?",
+    a: "The Juridical Singularity, linked to World Succession Deed 1400/98, provides the unified legal foundation that enables a global transition toward Electric Technocracy.",
+  },
+  {
+    q: "What role do humans play in a fully automated society?",
+    a: "Humans remain the source of creativity, art, science, innovation, culture and ethical judgment. The goal is not to replace humanity, but to free people from compulsory labor.",
+  },
 ];
 
 const ElectricTechnocracy = () => {
+  const [activeId, setActiveId] = useState<string>(toc[0].id);
+  const [tocOpen, setTocOpen] = useState(false);
+
   useEffect(() => {
     const absoluteUrl = `${SITE_URL}${PATH}`;
     const ogImage = `${SITE_URL}/og-pic.png`;
