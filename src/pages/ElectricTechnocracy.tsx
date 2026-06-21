@@ -210,6 +210,47 @@ const ElectricTechnocracy = () => {
       author: { "@type": "Organization", name: "Singularity University" },
       publisher: { "@type": "Organization", name: "Singularity University" },
     });
+
+    const faqLdId = "ld-electric-technocracy-faq";
+    let faqLd = document.getElementById(faqLdId) as HTMLScriptElement | null;
+    if (!faqLd) {
+      faqLd = document.createElement("script");
+      faqLd.id = faqLdId;
+      faqLd.type = "application/ld+json";
+      document.head.appendChild(faqLd);
+    }
+    faqLd.text = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faqs.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    });
+  }, []);
+
+  // Scroll-spy: highlight active TOC item
+  useEffect(() => {
+    const ids = toc.map((t) => t.id);
+    const elements = ids
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => !!el);
+    if (!elements.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (visible[0]) {
+          setActiveId(visible[0].target.id);
+        }
+      },
+      { rootMargin: "-30% 0px -60% 0px", threshold: [0, 0.25, 0.5, 1] },
+    );
+    elements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
   }, []);
 
   return (
