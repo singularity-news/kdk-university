@@ -808,6 +808,45 @@ const ElectricTechnocracy = () => {
         </div>
       </section>
 
+      {/* FAQ */}
+      <section
+        id="faq"
+        aria-labelledby="faq-heading"
+        className="section-pad border-t border-border/60 scroll-mt-32"
+      >
+        <div className="container max-w-4xl px-4 sm:px-6">
+          <div className="max-w-2xl mb-8 sm:mb-12">
+            <p className="text-[10px] tracking-[0.3em] uppercase text-primary mb-3 flex items-center gap-2">
+              <HelpCircle className="h-3.5 w-3.5" aria-hidden="true" />
+              14 · Questions
+            </p>
+            <h2 id="faq-heading" className="text-3xl md:text-5xl font-bold mb-4 text-gradient">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-muted-foreground leading-relaxed">
+              Short answers to the most common questions about Electric Technocracy, ASI
+              governance, Direct Digital Democracy and the technology dividend.
+            </p>
+          </div>
+          <Accordion type="single" collapsible className="w-full space-y-3">
+            {faqs.map((f, i) => (
+              <AccordionItem
+                key={f.q}
+                value={`faq-${i}`}
+                className="rounded-xl border border-border bg-card/60 backdrop-blur px-4 sm:px-6 data-[state=open]:border-primary/50"
+              >
+                <AccordionTrigger className="text-left text-base sm:text-lg font-medium text-foreground hover:no-underline">
+                  {f.q}
+                </AccordionTrigger>
+                <AccordionContent className="text-sm sm:text-base text-foreground/85 leading-relaxed">
+                  {f.a}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </section>
+
       {/* SHARE */}
       <section className="pb-20 sm:pb-24" aria-label="Share">
         <div className="container max-w-3xl px-4 sm:px-6">
