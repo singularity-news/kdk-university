@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { ShareButtons } from "@/components/site/ShareButtons";
@@ -17,7 +17,15 @@ import {
   Scale,
   Rocket,
   CheckCircle2,
+  ChevronDown,
+  HelpCircle,
 } from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const SITE_URL =
   (import.meta.env.VITE_SITE_URL as string | undefined)?.replace(/\/$/, "") ||
@@ -127,9 +135,40 @@ const toc = [
   { id: "science", label: "Science & Governance" },
   { id: "ethics", label: "Ethics" },
   { id: "vision", label: "Vision" },
+  { id: "faq", label: "FAQ" },
+];
+
+const faqs: { q: string; a: string }[] = [
+  {
+    q: "What is Electric Technocracy?",
+    a: "Electric Technocracy is a governance model in which Artificial Superintelligence (ASI), robotics and automation handle most economic production and public administration, while citizens make political decisions directly via Direct Digital Democracy.",
+  },
+  {
+    q: "How does Direct Digital Democracy (DDD) work?",
+    a: "Proposals are submitted publicly, discussed, analyzed by AI for impact, and then decided through digital voting using a secure digital identity. Approved decisions are implemented through automated systems.",
+  },
+  {
+    q: "Is ASI in charge of political decisions?",
+    a: "No. ASI serves as the analytical core and prepares evidence-based options. The final decisions always remain with citizens through democratic voting.",
+  },
+  {
+    q: "How is Universal Basic Income (UBI) financed?",
+    a: "UBI is funded through taxation of machine productivity — robots, AI systems, autonomous factories and machine-generated output — rather than taxes on human labor.",
+  },
+  {
+    q: "What is the relationship between Electric Technocracy and the Juridical Singularity?",
+    a: "The Juridical Singularity, linked to World Succession Deed 1400/98, provides the unified legal foundation that enables a global transition toward Electric Technocracy.",
+  },
+  {
+    q: "What role do humans play in a fully automated society?",
+    a: "Humans remain the source of creativity, art, science, innovation, culture and ethical judgment. The goal is not to replace humanity, but to free people from compulsory labor.",
+  },
 ];
 
 const ElectricTechnocracy = () => {
+  const [activeId, setActiveId] = useState<string>(toc[0].id);
+  const [tocOpen, setTocOpen] = useState(false);
+
   useEffect(() => {
     const absoluteUrl = `${SITE_URL}${PATH}`;
     const ogImage = `${SITE_URL}/og-pic.png`;
@@ -171,6 +210,47 @@ const ElectricTechnocracy = () => {
       author: { "@type": "Organization", name: "Singularity University" },
       publisher: { "@type": "Organization", name: "Singularity University" },
     });
+
+    const faqLdId = "ld-electric-technocracy-faq";
+    let faqLd = document.getElementById(faqLdId) as HTMLScriptElement | null;
+    if (!faqLd) {
+      faqLd = document.createElement("script");
+      faqLd.id = faqLdId;
+      faqLd.type = "application/ld+json";
+      document.head.appendChild(faqLd);
+    }
+    faqLd.text = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faqs.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    });
+  }, []);
+
+  // Scroll-spy: highlight active TOC item
+  useEffect(() => {
+    const ids = toc.map((t) => t.id);
+    const elements = ids
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => !!el);
+    if (!elements.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (visible[0]) {
+          setActiveId(visible[0].target.id);
+        }
+      },
+      { rootMargin: "-30% 0px -60% 0px", threshold: [0, 0.25, 0.5, 1] },
+    );
+    elements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -228,23 +308,85 @@ const ElectricTechnocracy = () => {
       {/* TABLE OF CONTENTS */}
       <nav
         aria-label="On this page"
-        className="border-b border-border/60 bg-card/30 backdrop-blur sticky top-16 z-30"
+        className="border-b border-border/60 bg-card/80 backdrop-blur sticky top-16 z-30"
       >
-        <div className="container max-w-6xl px-4 sm:px-6 py-3 overflow-x-auto">
-          <ul className="flex gap-2 sm:gap-3 list-none p-0 m-0 whitespace-nowrap text-xs sm:text-sm">
-            {toc.map((t) => (
-              <li key={t.id}>
-                <a
-                  href={`#${t.id}`}
-                  className="inline-block rounded-full border border-border bg-background/60 px-3 py-1.5 text-foreground/80 hover:text-foreground hover:border-primary/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary transition-colors"
-                >
-                  {t.label}
-                </a>
-              </li>
-            ))}
-          </ul>
+        <div className="container max-w-6xl px-4 sm:px-6">
+          {/* Mobile: collapsible */}
+          <div className="md:hidden py-2">
+            <button
+              type="button"
+              onClick={() => setTocOpen((o) => !o)}
+              aria-expanded={tocOpen}
+              aria-controls="toc-mobile-list"
+              className="flex items-center justify-between w-full rounded-md border border-border bg-background/60 px-3 py-2 text-sm text-foreground/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            >
+              <span className="flex items-center gap-2 min-w-0">
+                <span className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground shrink-0">
+                  On this page
+                </span>
+                <span className="truncate font-medium text-foreground">
+                  {toc.find((t) => t.id === activeId)?.label ?? toc[0].label}
+                </span>
+              </span>
+              <ChevronDown
+                className={`h-4 w-4 text-muted-foreground shrink-0 transition-transform ${tocOpen ? "rotate-180" : ""}`}
+                aria-hidden="true"
+              />
+            </button>
+            {tocOpen && (
+              <ul
+                id="toc-mobile-list"
+                className="mt-2 grid grid-cols-2 gap-2 list-none p-0 pb-2"
+              >
+                {toc.map((t) => {
+                  const active = t.id === activeId;
+                  return (
+                    <li key={t.id}>
+                      <a
+                        href={`#${t.id}`}
+                        onClick={() => setTocOpen(false)}
+                        aria-current={active ? "true" : undefined}
+                        className={`block rounded-md border px-3 py-2 text-xs transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+                          active
+                            ? "border-primary bg-primary/10 text-foreground font-medium"
+                            : "border-border bg-background/60 text-foreground/80 hover:text-foreground"
+                        }`}
+                      >
+                        {t.label}
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+          </div>
+
+          {/* Desktop: horizontal chips */}
+          <div className="hidden md:block py-3 overflow-x-auto">
+            <ul className="flex gap-3 list-none p-0 m-0 whitespace-nowrap text-sm">
+              {toc.map((t) => {
+                const active = t.id === activeId;
+                return (
+                  <li key={t.id}>
+                    <a
+                      href={`#${t.id}`}
+                      aria-current={active ? "true" : undefined}
+                      className={`inline-block rounded-full border px-3 py-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+                        active
+                          ? "border-primary bg-primary/10 text-foreground font-medium"
+                          : "border-border bg-background/60 text-foreground/80 hover:text-foreground hover:border-primary/60"
+                      }`}
+                    >
+                      {t.label}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         </div>
       </nav>
+
 
       {/* DEFINITION + PRINCIPLE */}
       <section
@@ -663,6 +805,45 @@ const ElectricTechnocracy = () => {
               </li>
             ))}
           </ul>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section
+        id="faq"
+        aria-labelledby="faq-heading"
+        className="section-pad border-t border-border/60 scroll-mt-32"
+      >
+        <div className="container max-w-4xl px-4 sm:px-6">
+          <div className="max-w-2xl mb-8 sm:mb-12">
+            <p className="text-[10px] tracking-[0.3em] uppercase text-primary mb-3 flex items-center gap-2">
+              <HelpCircle className="h-3.5 w-3.5" aria-hidden="true" />
+              14 · Questions
+            </p>
+            <h2 id="faq-heading" className="text-3xl md:text-5xl font-bold mb-4 text-gradient">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-muted-foreground leading-relaxed">
+              Short answers to the most common questions about Electric Technocracy, ASI
+              governance, Direct Digital Democracy and the technology dividend.
+            </p>
+          </div>
+          <Accordion type="single" collapsible className="w-full space-y-3">
+            {faqs.map((f, i) => (
+              <AccordionItem
+                key={f.q}
+                value={`faq-${i}`}
+                className="rounded-xl border border-border bg-card/60 backdrop-blur px-4 sm:px-6 data-[state=open]:border-primary/50"
+              >
+                <AccordionTrigger className="text-left text-base sm:text-lg font-medium text-foreground hover:no-underline">
+                  {f.q}
+                </AccordionTrigger>
+                <AccordionContent className="text-sm sm:text-base text-foreground/85 leading-relaxed">
+                  {f.a}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
       </section>
 
