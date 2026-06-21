@@ -308,23 +308,85 @@ const ElectricTechnocracy = () => {
       {/* TABLE OF CONTENTS */}
       <nav
         aria-label="On this page"
-        className="border-b border-border/60 bg-card/30 backdrop-blur sticky top-16 z-30"
+        className="border-b border-border/60 bg-card/80 backdrop-blur sticky top-16 z-30"
       >
-        <div className="container max-w-6xl px-4 sm:px-6 py-3 overflow-x-auto">
-          <ul className="flex gap-2 sm:gap-3 list-none p-0 m-0 whitespace-nowrap text-xs sm:text-sm">
-            {toc.map((t) => (
-              <li key={t.id}>
-                <a
-                  href={`#${t.id}`}
-                  className="inline-block rounded-full border border-border bg-background/60 px-3 py-1.5 text-foreground/80 hover:text-foreground hover:border-primary/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary transition-colors"
-                >
-                  {t.label}
-                </a>
-              </li>
-            ))}
-          </ul>
+        <div className="container max-w-6xl px-4 sm:px-6">
+          {/* Mobile: collapsible */}
+          <div className="md:hidden py-2">
+            <button
+              type="button"
+              onClick={() => setTocOpen((o) => !o)}
+              aria-expanded={tocOpen}
+              aria-controls="toc-mobile-list"
+              className="flex items-center justify-between w-full rounded-md border border-border bg-background/60 px-3 py-2 text-sm text-foreground/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            >
+              <span className="flex items-center gap-2 min-w-0">
+                <span className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground shrink-0">
+                  On this page
+                </span>
+                <span className="truncate font-medium text-foreground">
+                  {toc.find((t) => t.id === activeId)?.label ?? toc[0].label}
+                </span>
+              </span>
+              <ChevronDown
+                className={`h-4 w-4 text-muted-foreground shrink-0 transition-transform ${tocOpen ? "rotate-180" : ""}`}
+                aria-hidden="true"
+              />
+            </button>
+            {tocOpen && (
+              <ul
+                id="toc-mobile-list"
+                className="mt-2 grid grid-cols-2 gap-2 list-none p-0 pb-2"
+              >
+                {toc.map((t) => {
+                  const active = t.id === activeId;
+                  return (
+                    <li key={t.id}>
+                      <a
+                        href={`#${t.id}`}
+                        onClick={() => setTocOpen(false)}
+                        aria-current={active ? "true" : undefined}
+                        className={`block rounded-md border px-3 py-2 text-xs transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+                          active
+                            ? "border-primary bg-primary/10 text-foreground font-medium"
+                            : "border-border bg-background/60 text-foreground/80 hover:text-foreground"
+                        }`}
+                      >
+                        {t.label}
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+          </div>
+
+          {/* Desktop: horizontal chips */}
+          <div className="hidden md:block py-3 overflow-x-auto">
+            <ul className="flex gap-3 list-none p-0 m-0 whitespace-nowrap text-sm">
+              {toc.map((t) => {
+                const active = t.id === activeId;
+                return (
+                  <li key={t.id}>
+                    <a
+                      href={`#${t.id}`}
+                      aria-current={active ? "true" : undefined}
+                      className={`inline-block rounded-full border px-3 py-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+                        active
+                          ? "border-primary bg-primary/10 text-foreground font-medium"
+                          : "border-border bg-background/60 text-foreground/80 hover:text-foreground hover:border-primary/60"
+                      }`}
+                    >
+                      {t.label}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         </div>
       </nav>
+
 
       {/* DEFINITION + PRINCIPLE */}
       <section
