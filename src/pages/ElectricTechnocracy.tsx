@@ -34,7 +34,7 @@ const SITE_URL =
 const PATH = "/electric-technocracy.html";
 const TITLE = "Electric Technocracy · ASI, DDD & UBI Governance Model";
 const DESCRIPTION =
-  "Electric Technocracy: governance through ASI analysis, Direct Digital Democracy and a technology dividend (UBI) — a peaceful, automated post-scarcity civilization.";
+  "Electric Technocracy: ASI-driven governance, Direct Digital Democracy and a UBI technology dividend for a peaceful, automated post-scarcity civilization.";
 
 const setMeta = (selector: string, attr: string, value: string) => {
   let el = document.head.querySelector<HTMLMetaElement>(selector);

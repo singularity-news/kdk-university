@@ -14,10 +14,15 @@ const articles = JSON.parse(readFileSync(resolve("src/data/articles.json"), "utf
 
 const staticRoutes = [
   { loc: "/", priority: "1.0", changefreq: "weekly" },
+  { loc: "/juridical-singularity", priority: "0.9", changefreq: "monthly" },
   { loc: "/juridical-singularity.html", priority: "0.9", changefreq: "monthly" },
+  { loc: "/electric-technocracy", priority: "0.9", changefreq: "monthly" },
   { loc: "/electric-technocracy.html", priority: "0.9", changefreq: "monthly" },
+  { loc: "/research", priority: "0.9", changefreq: "monthly" },
   { loc: "/research.html", priority: "0.9", changefreq: "monthly" },
+  { loc: "/courses", priority: "0.9", changefreq: "monthly" },
   { loc: "/courses.html", priority: "0.9", changefreq: "monthly" },
+  { loc: "/news", priority: "0.9", changefreq: "daily" },
   { loc: "/news.html", priority: "0.9", changefreq: "daily" },
 ];
 
