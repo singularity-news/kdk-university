@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { StaticPage } from "./StaticPage";
 
 
@@ -96,6 +97,26 @@ const ResearchPage = () => (
       technologically integrated civilization based on Direct Digital Democracy (DDD), automation,
       Universal Basic Income (UBI), and AI-supported governance.
     </p>
+
+    <h2>Research Guides</h2>
+    <div className="not-prose my-6 rounded-lg border border-primary/40 bg-primary/5 p-5">
+      <div className="text-[10px] tracking-[0.2em] uppercase text-accent mb-2">Long-form Guide</div>
+      <h3 className="text-lg font-semibold mb-2">
+        <Link to="/research/digital-sovereignty-guide" className="hover:underline">
+          What is Digital Sovereignty? A Guide for the Post-National Era
+        </Link>
+      </h3>
+      <p className="text-sm text-muted-foreground leading-relaxed mb-3">
+        From territorial jurisdiction to infrastructure-based control: how digital sovereignty,
+        ASI and the Juridical Singularity reshape governance.
+      </p>
+      <Link
+        to="/research/digital-sovereignty-guide"
+        className="text-xs tracking-[0.2em] uppercase text-primary hover:underline"
+      >
+        Read the guide →
+      </Link>
+    </div>
 
     <h2>Key Publications</h2>
     {publications.map((p) => (
