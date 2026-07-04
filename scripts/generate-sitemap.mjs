@@ -20,6 +20,7 @@ const staticRoutes = [
   { loc: "/electric-technocracy.html", priority: "0.9", changefreq: "monthly" },
   { loc: "/research", priority: "0.9", changefreq: "monthly" },
   { loc: "/research.html", priority: "0.9", changefreq: "monthly" },
+  { loc: "/research/digital-sovereignty-guide", priority: "0.8", changefreq: "monthly" },
   { loc: "/courses", priority: "0.9", changefreq: "monthly" },
   { loc: "/courses.html", priority: "0.9", changefreq: "monthly" },
   { loc: "/news", priority: "0.9", changefreq: "daily" },
