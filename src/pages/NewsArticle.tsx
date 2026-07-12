@@ -93,64 +93,66 @@ const NewsArticle = () => {
 
   if (!article) {
     return (
-      <main className="min-h-dvh bg-background">
+      <>
         <Nav />
-        <section className="container max-w-2xl pt-40 pb-32 text-center">
-          <h1 className="text-3xl font-semibold mb-4">Article not found</h1>
-          <p className="text-muted-foreground mb-8">The publication you requested does not exist.</p>
-          <Link to="/news.html" className="text-primary text-sm tracking-[0.2em] uppercase">
-            ← Back to News Portal
-          </Link>
-        </section>
+        <main id="main" className="min-h-dvh bg-background">
+          <section className="container max-w-2xl pt-40 pb-32 text-center">
+            <h1 className="text-3xl font-semibold mb-4">Article not found</h1>
+            <p className="text-muted-foreground mb-8">The publication you requested does not exist.</p>
+            <Link to="/news.html" className="text-primary text-sm tracking-[0.2em] uppercase">
+              ← Back to News Portal
+            </Link>
+          </section>
+        </main>
         <Footer />
-      </main>
+      </>
     );
   }
 
   const body = article.body || [article.excerpt];
 
   return (
-    <main className="min-h-dvh bg-background">
+    <>
       <Nav />
+      <main id="main" className="min-h-dvh bg-background">
+        <article className="relative pt-32 pb-24">
+          <div className="container max-w-3xl">
+            <Link
+              to="/news.html"
+              className="inline-flex items-center gap-2 text-xs tracking-[0.2em] uppercase text-muted-foreground hover:text-primary transition-colors mb-10"
+            >
+              <ArrowLeft className="h-3.5 w-3.5" /> Back to News Portal
+            </Link>
 
-      <article className="relative pt-32 pb-24">
-        <div className="container max-w-3xl">
-          <Link
-            to="/news.html"
-            className="inline-flex items-center gap-2 text-xs tracking-[0.2em] uppercase text-muted-foreground hover:text-primary transition-colors mb-10"
-          >
-            <ArrowLeft className="h-3.5 w-3.5" /> Back to News Portal
-          </Link>
+            <div className="text-[10px] tracking-[0.25em] uppercase text-accent mb-4">
+              {article.category} · {article.dateLabel}
+            </div>
 
-          <div className="text-[10px] tracking-[0.25em] uppercase text-accent mb-4">
-            {article.category} · {article.dateLabel}
+            <h1 className="text-3xl md:text-5xl font-semibold leading-[1.1] mb-6">{article.title}</h1>
+
+            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-10">{article.excerpt}</p>
+
+            <div className="text-xs tracking-[0.2em] uppercase text-muted-foreground border-y border-border/60 py-4 mb-12">
+              By {article.author} — {new Date(article.date).getFullYear()}
+            </div>
+
+            <div className="prose prose-invert max-w-none prose-p:text-foreground/85 prose-p:leading-relaxed prose-p:text-base md:prose-p:text-lg">
+              {body.map((p, i) => (
+                <p key={i}>{p}</p>
+              ))}
+            </div>
+
+            <ShareButtons url={`/news/${article.slug}.html`} title={article.title} />
+
+            <div className="mt-8 pt-8 border-t border-border/60 text-xs tracking-[0.2em] uppercase text-muted-foreground">
+              Singularity University · KdK Krzb. · Editorial Board
+            </div>
           </div>
-
-          <h1 className="text-3xl md:text-5xl font-semibold leading-[1.1] mb-6">{article.title}</h1>
-
-          <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-10">{article.excerpt}</p>
-
-          <div className="text-xs tracking-[0.2em] uppercase text-muted-foreground border-y border-border/60 py-4 mb-12">
-            By {article.author} — {new Date(article.date).getFullYear()}
-          </div>
-
-          <div className="prose prose-invert max-w-none prose-p:text-foreground/85 prose-p:leading-relaxed prose-p:text-base md:prose-p:text-lg">
-            {body.map((p, i) => (
-              <p key={i}>{p}</p>
-            ))}
-          </div>
-
-          <ShareButtons url={`/news/${article.slug}.html`} title={article.title} />
-
-          <div className="mt-8 pt-8 border-t border-border/60 text-xs tracking-[0.2em] uppercase text-muted-foreground">
-            Singularity University · KdK Krzb. · Editorial Board
-          </div>
-        </div>
-      </article>
-
+        </article>
+      </main>
       <Footer />
       <BackToTop />
-    </main>
+    </>
   );
 };
 
