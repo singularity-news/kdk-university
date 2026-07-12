@@ -13,20 +13,22 @@ import { BackToTop } from "@/components/site/BackToTop";
 
 const Index = () => {
   return (
-    <main className="min-h-dvh bg-background">
+    <>
       <Nav />
-      <Hero />
-      <Welcome />
-      <Introduction />
-      <Juridical />
-      <Technocracy />
-      <Research />
-      <WikiCard />
-      <News />
-      <CTA />
+      <main id="main" className="min-h-dvh bg-background">
+        <Hero />
+        <Welcome />
+        <Introduction />
+        <Juridical />
+        <Technocracy />
+        <Research />
+        <WikiCard />
+        <News />
+        <CTA />
+      </main>
       <Footer />
       <BackToTop />
-    </main>
+    </>
   );
 };
 

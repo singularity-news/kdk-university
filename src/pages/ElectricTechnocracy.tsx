@@ -254,8 +254,9 @@ const ElectricTechnocracy = () => {
   }, []);
 
   return (
-    <main id="main" className="min-h-dvh bg-background">
+    <>
       <Nav />
+      <main id="main" className="min-h-dvh bg-background">
 
       {/* HERO */}
       <header className="relative overflow-hidden border-b border-border/60 pt-28 pb-16 sm:pt-32 sm:pb-20 md:pt-40 md:pb-28">
@@ -857,9 +858,10 @@ const ElectricTechnocracy = () => {
         </div>
       </section>
 
+      </main>
       <Footer />
       <BackToTop />
-    </main>
+    </>
   );
 };
 

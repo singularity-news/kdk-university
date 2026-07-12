@@ -54,23 +54,25 @@ export const StaticPage = ({ title, description, path, eyebrow, heading, childre
   }, [title, description, path]);
 
   return (
-    <main className="min-h-dvh bg-background">
+    <>
       <Nav />
-      <article className="relative pt-32 pb-24">
-        <div className="container max-w-3xl">
-          <div className="text-[10px] tracking-[0.25em] uppercase text-accent mb-4">{eyebrow}</div>
-          <h1 className="text-3xl md:text-5xl font-semibold leading-[1.1] mb-10">{heading}</h1>
-          <div className="prose prose-invert max-w-none prose-headings:text-foreground prose-p:text-foreground/85 prose-p:leading-relaxed prose-p:text-base md:prose-p:text-lg prose-li:text-foreground/85 prose-a:text-primary prose-strong:text-foreground">
-            {children}
+      <main id="main" className="min-h-dvh bg-background">
+        <article className="relative pt-32 pb-24">
+          <div className="container max-w-3xl">
+            <div className="text-[10px] tracking-[0.25em] uppercase text-accent mb-4">{eyebrow}</div>
+            <h1 className="text-3xl md:text-5xl font-semibold leading-[1.1] mb-10">{heading}</h1>
+            <div className="prose prose-invert max-w-none prose-headings:text-foreground prose-p:text-foreground/85 prose-p:leading-relaxed prose-p:text-base md:prose-p:text-lg prose-li:text-foreground/85 prose-a:text-primary prose-strong:text-foreground">
+              {children}
+            </div>
+            <ShareButtons url={path} title={title} />
+            <div className="mt-8 pt-8 border-t border-border/60 text-xs tracking-[0.2em] uppercase text-muted-foreground">
+              Singularity University · KdK Krzb. · Editorial Board
+            </div>
           </div>
-          <ShareButtons url={path} title={title} />
-          <div className="mt-8 pt-8 border-t border-border/60 text-xs tracking-[0.2em] uppercase text-muted-foreground">
-            Singularity University · KdK Krzb. · Editorial Board
-          </div>
-        </div>
-      </article>
+        </article>
+      </main>
       <Footer />
       <BackToTop />
-    </main>
+    </>
   );
 };
