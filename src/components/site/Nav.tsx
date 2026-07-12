@@ -134,5 +134,6 @@ export const Nav = () => {
         </div>
       )}
     </header>
+    </>
   );
 };
