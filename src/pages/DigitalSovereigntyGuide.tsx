@@ -384,6 +384,7 @@ const DigitalSovereigntyGuide = () => {
 
           <ShareButtons url={PATH} title={TITLE} />
         </div>
+      </article>
       </main>
       <BackToTop />
       <Footer />
