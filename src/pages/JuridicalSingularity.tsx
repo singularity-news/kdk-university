@@ -139,8 +139,9 @@ const JuridicalSingularity = () => {
   }, []);
 
   return (
-    <main className="min-h-dvh bg-background">
+    <>
       <Nav />
+      <main id="main" className="min-h-dvh bg-background">
 
       {/* HERO */}
       <header className="relative overflow-hidden border-b border-border/60 pt-32 pb-20 md:pt-40 md:pb-28">
@@ -383,9 +384,10 @@ const JuridicalSingularity = () => {
         </div>
       </section>
 
+      </main>
       <Footer />
       <BackToTop />
-    </main>
+    </>
   );
 };
 

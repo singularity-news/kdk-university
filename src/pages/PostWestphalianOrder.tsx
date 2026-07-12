@@ -71,8 +71,9 @@ const PostWestphalianOrder = () => {
   ];
 
   return (
-    <main className="min-h-dvh bg-background">
+    <>
       <Nav />
+      <main id="main" className="min-h-dvh bg-background">
 
       <article className="relative pt-32 pb-24">
         <div className="container max-w-3xl">
@@ -308,8 +309,9 @@ const PostWestphalianOrder = () => {
         </div>
       </article>
 
+      </main>
       <Footer />
-    </main>
+    </>
   );
 };
 

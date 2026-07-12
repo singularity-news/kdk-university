@@ -52,7 +52,14 @@ export const Nav = () => {
   }, [open]);
 
   return (
-    <header
+    <>
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-background focus:text-foreground focus:border focus:border-primary focus:shadow-[0_0_24px_hsl(var(--primary)/0.4)] focus:outline-none"
+      >
+        Skip to main content
+      </a>
+      <header
       ref={wrapRef}
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
         scrolled ? "backdrop-blur-xl bg-background/70 border-b border-border/60" : ""
@@ -127,5 +134,6 @@ export const Nav = () => {
         </div>
       )}
     </header>
+    </>
   );
 };

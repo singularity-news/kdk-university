@@ -78,8 +78,9 @@ const Courses = () => {
   }, []);
 
   return (
-    <main className="min-h-dvh bg-background">
+    <>
       <Nav />
+      <main id="main" className="min-h-dvh bg-background">
 
       <section className="relative pt-32 pb-12 border-b border-border/60">
         <div className="container max-w-4xl">
@@ -268,9 +269,10 @@ const Courses = () => {
         </div>
       </section>
 
+      </main>
       <Footer />
       <BackToTop />
-    </main>
+    </>
   );
 };
 
